@@ -8,7 +8,9 @@ app.get('/', (req, res) => {
 })
 
 app.get('/about', (req, res) => {
-    res.send("<h1>I am about</h1>")
+    res.json({
+        message: "This is massege from about"
+    })
 })
 
 app.get('*', (req, res) => {
