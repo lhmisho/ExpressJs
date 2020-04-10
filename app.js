@@ -1,23 +1,12 @@
 const express = require('express');
 const app = express();
+const userRouter = require('./router');
+const postsRouter = require('./posts');
+
 const PORT = process.env.PORT || 8090
 
-const router = express.Router()
-
-router.get('/login', (req, res) => {
-    res.send('I am login route');
-})
-
-router.get('/logout', (req, res) => {
-    res.send('I am logout route');
-})
-
-router.get('/signup', (req, res) => {
-    res.send('I am signup')
-})
-
-app.use('/user', router)
-
+app.use('/user', userRouter)
+app.use('/posts', postsRouter)
 
 app.get('/', (req, res) => {
     res.send("NodeJs is awsome!")
