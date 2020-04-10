@@ -1,47 +1,31 @@
 const express = require('express');
-const app = express()
-
+const app = express();
 const PORT = process.env.PORT || 8090
 
+const router = express.Router()
 
-function customeMiddleWare(req, res, next){
-    if(req.url === '/help'){
-        res.send('<h1>This page is blocked by admin</h1>')
-    }
-    next()
-}
+router.get('/login', (req, res) => {
+    res.send('I am login route');
+})
 
-function tinyLogger(){
-    return (req, res, next) =>{
-        console.log(`${req.method} -- ${req.url}`)
-        next()
-    }
-}
+router.get('/logout', (req, res) => {
+    res.send('I am logout route');
+})
 
-let middlewares = [customeMiddleWare, tinyLogger()]
-app.use(middlewares)
+router.get('/signup', (req, res) => {
+    res.send('I am signup')
+})
+
+app.use('/user', router)
+
 
 app.get('/', (req, res) => {
-    res.send("<h1>I am listening</h1>")
-})
-
-app.get('/about', (req, res) => {
-    res.json({
-        message: "This is massege from about"
-    })
-})
-
-app.get('/help', (req, res) => {
-    res.json({
-        message: "This is massege from about"
-    })
+    res.send("NodeJs is awsome!")
 })
 
 app.get('*', (req, res) => {
     res.send("<h1>404 not found</h1>")
 })
-
-
 
 app.listen(PORT, ()=>{
     console.log(`Server is running on ${PORT}`)
