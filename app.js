@@ -7,6 +7,11 @@ const PORT = process.env.PORT || 8090
 
 app.use('/user', userRouter)
 app.use('/posts', postsRouter)
+app.get('/products/:prodId/reviews/:revId', (req, res) => {
+    console.log(req.params)
+    res.send("i am listening" + req.params.prodId)
+})
+
 
 app.get('/', (req, res) => {
     res.send("NodeJs is awsome!")
